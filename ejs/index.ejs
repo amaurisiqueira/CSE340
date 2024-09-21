@@ -1,45 +1,46 @@
-<%- include('partials/header') %>
-<body>
+<%- include('partials/head') %>
 
+
+  <%- include('partials/header') %>
     <main class="main main_common  main_common--borderleft main_common--border_rigth ">
 
        
         <h1 class="main_common-h1">Welcome to CSE Motors!</h1>
-        <section class="delorian-container"> 
+        <div class="delorian-container"> 
            
-          <picture class="image-delorian" >
+            <picture class="image-delorian" >
  
-              <source media="(min-width: 601px)" srcset="/images/vehicles/delorean.jpg"  />
-              <img src="/images/vehicles/delorean-tn.jpg" alt="Delorean image" />
+              <source media="(min-width: 601px)" srcset="/images/vehicles/delorean.jpg" >
+              <img src="/images/vehicles/delorean-tn.jpg" alt="Delorean image">
             </picture>
  
-            <section class="owntoday-container"> 
-              <article class="owntoday-container__text">
+            <div class="owntoday-container"> 
+              <div class="owntoday-container__text">
                 <span class="owntoday-container__text-title">DMC Delorean</span>
                 <p class="owntoday-container__text-body">3 Cup holders</p>
                 <p class="owntoday-container__text-body">Superman doors</p>
                 <p class="owntoday-container__text-body">Fuzzy docel</p>
-              </article>
+              </div>
               <div class="owntoday-container__image" > </div>
-            </section>
+            </div>
 
 
-        </section>
+        </div>
       
         
 
         <div class="details">
           
-        <section class="review">             
+        <div class="review">             
             <span class="review__title">DMC Delorean review</span>
             <p class="review__text">"So fast it's almost like traveling in time" (4/5)</p>
             <p class="review__text">"Coolest ride on the road." (4/5)</p>
             <p class="review__text">"I'm feeling McFly!" (5/5)</p>
             <p class="review__text">"The most futuristic ride of our day." (4.5/5) </p>
             <p class="review__text">"80'livin and I love It!" (5/5) </p>
-        </section>
+        </div>
       
-        <section class="upgrades"> 
+        <div class="upgrades"> 
 
           <span class="upgrades__title">Delorean Upgrades</span>
 
@@ -71,11 +72,11 @@
               linkHref: '#',
               linkText: 'Hub Caps'
             }) %>
-        </section>
+        </div>
 
       </div>
 
     </main>
 
-</body>
+
 <%- include('partials/footer') %>
