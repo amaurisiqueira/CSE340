@@ -1,0 +1,81 @@
+<%- include('partials/header') %>
+<body>
+
+    <main class="main main_common  main_common--borderleft main_common--border_rigth ">
+
+       
+        <h1 class="main_common-h1">Welcome to CSE Motors!</h1>
+        <section class="delorian-container"> 
+           
+          <picture class="image-delorian" >
+ 
+              <source media="(min-width: 601px)" srcset="/images/vehicles/delorean.jpg"  />
+              <img src="/images/vehicles/delorean-tn.jpg" alt="Delorean image" />
+            </picture>
+ 
+            <section class="owntoday-container"> 
+              <article class="owntoday-container__text">
+                <span class="owntoday-container__text-title">DMC Delorean</span>
+                <p class="owntoday-container__text-body">3 Cup holders</p>
+                <p class="owntoday-container__text-body">Superman doors</p>
+                <p class="owntoday-container__text-body">Fuzzy docel</p>
+              </article>
+              <div class="owntoday-container__image" > </div>
+            </section>
+
+
+        </section>
+      
+        
+
+        <div class="details">
+          
+        <section class="review">             
+            <span class="review__title">DMC Delorean review</span>
+            <p class="review__text">"So fast it's almost like traveling in time" (4/5)</p>
+            <p class="review__text">"Coolest ride on the road." (4/5)</p>
+            <p class="review__text">"I'm feeling McFly!" (5/5)</p>
+            <p class="review__text">"The most futuristic ride of our day." (4.5/5) </p>
+            <p class="review__text">"80'livin and I love It!" (5/5) </p>
+        </section>
+      
+        <section class="upgrades"> 
+
+          <span class="upgrades__title">Delorean Upgrades</span>
+
+
+            <%- include('partials/square', {
+                imgSrc: '/images/upgrades/flux-cap.png',                
+                description: 'Image of Bumper Flux Capacitor',
+                linkHref: '#',
+                linkText: 'Flux Capacitor'
+            }) %>
+
+            <%- include('partials/square', {
+              imgSrc: '/images/upgrades/flame.jpg',
+              description: 'Image of Bumper Flame Decals',
+              linkHref: '#',
+              linkText: 'Flame Decals'
+            }) %>
+
+            <%- include('partials/square', {
+              imgSrc: '/images/upgrades/bumper_sticker.jpg',
+              description: 'Image of Bumper Stickers',
+              linkHref: '#',
+              linkText: 'Bumper Stickers'
+            }) %>
+
+            <%- include('partials/square', {
+              imgSrc: '/images/upgrades/hub-cap.jpg',
+              description: 'Image of Hub Caps',
+              linkHref: '#',
+              linkText: 'Hub Caps'
+            }) %>
+        </section>
+
+      </div>
+
+    </main>
+
+</body>
+<%- include('partials/footer') %>
