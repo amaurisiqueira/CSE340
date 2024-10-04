@@ -11,10 +11,10 @@ let Util = {};
 Util.getNav = async function (req, res, next) {
   
   let data = await inventoryModel.getClassifications()
-  let list = "<ul>"
-  list += '<li><a href="/" title="Home page">Home</a></li>'
+  let list = '<ul class="mainnav__ul">';
+  list += '<li class="mainnav__ul-li"><a href="/" title="Home page">Home</a></li>'
   data.rows.forEach((row) => {
-    list += "<li>"
+    list += '<li class="mainnav__ul-li">';
     list +=
       '<a href="/inv/type/' +
       row.classification_id +
@@ -23,12 +23,12 @@ Util.getNav = async function (req, res, next) {
       ' vehicles">' +
       row.classification_name +
       "</a>"
-    list += "</li>"
+    list += "</li>";
   })
-  list += "</ul>"
+  list += "</ul>";
 
   console.log('Util.getNav   List' , list);  
-  return list
+  return list;
 }
 
 /* ****************************************

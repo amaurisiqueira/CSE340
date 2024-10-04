@@ -9,7 +9,7 @@
 
 const path = require('path');
 const express = require("express");
-const main = require("./routes/main.js");
+//  const main = require("./routes/main.js");
 const env = require("dotenv").config();
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
@@ -39,7 +39,7 @@ app.get("/", utilities.handleErrors(baseController.buildHome));
 /* ***********************
 * Express Error Handler
 * Place after all other middleware
- Error 404 
+* Error 404 
 *************************/
 app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
