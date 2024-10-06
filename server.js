@@ -15,6 +15,7 @@ const app = express();
 const expressLayouts = require("express-ejs-layouts");
 const utilities = require("./utilities");
 const baseController = require("./controllers/baseController");
+const  inventoryRoute = require("./routes/inventoryRoute");
 
 /******************
  Views
@@ -32,8 +33,24 @@ app.set("layout", "./layouts/layout"); // not at views root
 app.use(express.static(path.join(__dirname, 'public')))
 //app.use(require("./routes/static")) ;
 app.get("/", utilities.handleErrors(baseController.buildHome));
+app.use("/inv", utilities.handleErrors(inventoryRoute))
 // app.use(main);
 
+app.use(async (req, res, next) => {
+  next({
+    status: 404,
+    message: "Oh no! There was a crash. Maybe try a different route?",
+  });
+});
+app.use(async (req, res, next) => {
+  next({
+    status: 500,
+    message: "I am running away from my responsibilities. And it feels good.",
+  });
+});
+
+
+ 
 
 
 /* ***********************
