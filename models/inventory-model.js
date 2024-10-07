@@ -34,7 +34,7 @@ async function getVehicleByDetId(detail_id){
       WHERE i.inv_id = $1`,
       [detail_id]
     )
-    return data.rows//[0]
+    return data.rows
   }catch(error){
     console.error("getdetailsbyid error " + error)
   }
