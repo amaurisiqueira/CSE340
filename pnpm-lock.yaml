@@ -29,6 +29,9 @@ importers:
       express-message:
         specifier: ^1.2.3
         version: 1.2.3
+      express-messages:
+        specifier: ^1.0.1
+        version: 1.0.1
       express-session:
         specifier: ^1.18.1
         version: 1.18.1
@@ -204,6 +207,10 @@ packages:
 
   express-message@1.2.3:
     resolution: {integrity: sha512-EoBgk5kljT3LJyoeyzcSsR8+I9dg+As3DZxgpkq/AyMqT1UosDnwqT1IaaUrfLgqaeWz1EV5XTCZ14Rh0Gb2Ig==}
+
+  express-messages@1.0.1:
+    resolution: {integrity: sha512-twwOvH1K0W7pPO/bz/Lq85GULnnZPQSPX3eLr7VRJyhQW9a+2vj9QI28r/AQhMu6bnNZkpxB/QflsDQi3hI7lQ==}
+    engines: {node: '>= 0.10.0'}
 
   express-session@1.18.1:
     resolution: {integrity: sha512-a5mtTqEaZvBCL9A9aqkrtfz+3SMDhOVUnjafjo+s7A9Txkq+SVX2DLvSp1Zrv4uCXa3lMSK3viWnh9Gg07PBUA==}
@@ -719,6 +726,8 @@ snapshots:
   express-message@1.2.3:
     dependencies:
       jpv: 2.2.2
+
+  express-messages@1.0.1: {}
 
   express-session@1.18.1:
     dependencies:
