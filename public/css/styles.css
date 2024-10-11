@@ -474,6 +474,14 @@ comienza sitio  semana 3
     }
   
 
+    .notice{
+
+      background-color:inherit;
+      color: red; /* Color del texto */    
+      margin: 10px 2px; /* Margen */
+
+    }
+
 /*
 
 

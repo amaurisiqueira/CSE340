@@ -16,6 +16,7 @@ const expressLayouts = require("express-ejs-layouts");
 const utilities = require("./utilities");
 const baseController = require("./controllers/baseController");
 const  inventoryRoute = require("./routes/inventoryRoute");
+const  accountRoute= require("./routes/accountRoute");
 const session = require("express-session")
 const pool = require('./database/')
 /******************
@@ -46,9 +47,11 @@ app.use(session({
 }));
 
 // Express Messages Middleware
-app.use(require('connect-flash')())
+app.use(require('connect-flash')());
+
 app.use(function(req, res, next){
-  res.locals.messages = require('express-messages')(req, res)
+  res.locals.notices = require('express-messages')(req, res) ;
+  // console.log('\n\n\n\n\n\nNotices:', res.locals.notices); //
   next()
 });
 
@@ -61,7 +64,9 @@ app.use(function(req, res, next){
 app.use(express.static(path.join(__dirname, 'public')))
 //app.use(require("./routes/static")) ;
 app.get("/", utilities.handleErrors(baseController.buildHome));
-app.use("/inv", utilities.handleErrors(inventoryRoute))
+app.use("/inv", utilities.handleErrors(inventoryRoute)) ;
+app.use("/account", utilities.handleErrors(accountRoute)) ;
+
 // app.use(main);
 
 app.use(async (req, res, next) => {
