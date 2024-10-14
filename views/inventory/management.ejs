@@ -1,0 +1,22 @@
+<% if (title) { %>
+  <h1 class="global_h1_title"><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+  <%- notices()   %>
+<div class="management_w4">
+    <%#- messages() %>
+
+    <% if (errors) { %>
+      <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <%  }) %>
+    </ul>
+    <% } %>
+    <div class="management_w4-caja">
+    <a class="management_w4-link" href="/inv/add-classification/">Add New Classification</a>
+    <a class="management_w4-link" href="/inv/add-inventory/">Add New Vehicle</a>
+    </div> 
+</div>
+ 

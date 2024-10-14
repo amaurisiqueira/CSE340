@@ -17,8 +17,9 @@ const utilities = require("./utilities");
 const baseController = require("./controllers/baseController");
 const  inventoryRoute = require("./routes/inventoryRoute");
 const  accountRoute= require("./routes/accountRoute");
-const session = require("express-session")
-const pool = require('./database/')
+const session = require("express-session");
+const pool = require('./database/');
+const bodyParser = require("body-parser");
 /******************
  Views
  *****************/
@@ -55,6 +56,8 @@ app.use(function(req, res, next){
   next()
 });
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true })); 
 
 
 
@@ -65,6 +68,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 //app.use(require("./routes/static")) ;
 app.get("/", utilities.handleErrors(baseController.buildHome));
 app.use("/inv", utilities.handleErrors(inventoryRoute)) ;
+//w4
 app.use("/account", utilities.handleErrors(accountRoute)) ;
 
 // app.use(main);
