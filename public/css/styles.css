@@ -475,7 +475,6 @@ comienza sitio  semana 3
   
 
     .notice{
-
       background-color:inherit;
       color: red; /* Color del texto */    
       margin: 10px 2px; /* Margen */
@@ -486,6 +485,28 @@ comienza sitio  semana 3
 /*
 W4
 */
+
+
+.submit_boton_global{
+  /*
+  background-color: antiquewhite;
+  padding: 10px 25px;
+  font-size: 1.5rem;
+  margin-top: 10px;
+  border-radius: 15px;*/
+    
+  background-color: antiquewhite; /* var(----MAIN-BACKGROUND-COLOR);*/
+  padding:10px;
+  text-decoration: none;
+  min-width:250px;
+  text-align: center;
+  font-size:1.25em;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px rgb(44, 38, 83);
+  margin-bottom:5px;
+ }
+
+
 
 /*Login*/
 .login_form fieldset{
@@ -514,12 +535,7 @@ W4
  font-size: 1.5rem;
  text-align: left;
 }
-.login_form .submitBtn{
- padding: 10px 25px;
- font-size: 1.5rem;
- margin-top: 10px;
- border-radius: 15px;
-}
+
 .login_form div{
  display: flex;
  flex-direction: row;
@@ -559,17 +575,7 @@ W4
   padding-bottom: 10px;
 }
 
-.management_w4-link{
-  background-color: var(----MAIN-BACKGROUND-COLOR);
-  padding:10px;
-  text-decoration: none;
-  min-width:250px;
-  text-align: center;
-  font-size:1.25em;
-  border-radius: 5px;
-  box-shadow: 2px 2px 5px rgb(44, 38, 83);
-  margin-bottom:5px;
-}
+
 
 .login_form_input{
   display: block;
