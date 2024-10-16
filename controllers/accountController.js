@@ -84,6 +84,9 @@ async function registerAccount(req, res) {
   let nav = await utilities.getNav()
   const { account_email, account_password } = req.body
   const accountData = await accountModel.getAccountByEmail(account_email)
+
+  console.log(' accountData:',accountData);
+
   if (!accountData) {
     req.flash("notice", "Please check your credentials and try again.")
     res.status(400).render("account/login", {
@@ -95,6 +98,10 @@ async function registerAccount(req, res) {
     return
   }
   try {
+
+console.log('account_password:',account_password , '  accountData.account_password' ,accountData.account_password);
+
+
     if (await bcrypt.compare(account_password, accountData.account_password)) {
       delete accountData.account_password;
       const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, 
@@ -127,7 +134,15 @@ async function accountLogin(req, res) {
     return
   }
   //try {
+
+  console.log('controlller -> accountLogin -> account_password:', account_password, ' accountData.account_password:', accountData.account_password);
+
     if (await bcrypt.compare(account_password, accountData.account_password)) {
+
+
+
+    console.log('enter in await bcrypt.compare.');
+
       delete accountData.account_password
       const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 })
       if (process.env.NODE_ENV === 'development') {
@@ -138,6 +153,9 @@ async function accountLogin(req, res) {
       return res.redirect("/account/")
     }
     else {
+     
+      console.log('Invalid password');
+
       req.flash("notice", "Invalid password. Please try again.")
       res.status(401).render("account/login", {
         title: "Login",

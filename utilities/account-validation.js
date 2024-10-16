@@ -106,14 +106,15 @@ validate.checkLoginData = async (req, res, next) => {
   const { account_email, account_password } = req.body;
   let errors = [];
   errors = validationResult(req);
+
+  console.log('errors', errors);
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav();
   
     res.render("account/login", {
       errors,
       title: "Login",
-      nav,
- 
+      nav, 
       account_email,
       account_password,
     });

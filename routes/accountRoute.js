@@ -12,8 +12,7 @@ const regValidate = require('../utilities/account-validation');
 modied W5
 // Process the login attempt
 ***********************************/
-router.post( 
-   '/login',
+router.post(    '/login',
    regValidate.loginRules(),
    regValidate.checkLoginData ,
    utilities.handleErrors(accountController.accountLogin)
