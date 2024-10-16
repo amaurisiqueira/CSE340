@@ -61,7 +61,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 //W5  cookie
 app.use(cookieParser());
-
+app.use(utilities.checkJWTToken);
 
 /* ***********************
  * Routes
