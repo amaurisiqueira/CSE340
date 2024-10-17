@@ -1,5 +1,5 @@
 const inventoryModel = require("../models/inventory-model")
- 
+const jwt = require("jsonwebtoken");
 //require("dotenv").config()  ;
 
 let Util = {};
@@ -140,6 +140,19 @@ Util.checkJWTToken = (req, res, next) => {
     })
   } else {
    next()
+  }
+ }
+
+ /* ****************************************
+ *  Check Login
+  W5 jwt
+ * ************************************ */
+ Util.checkLogin = (req, res, next) => {
+  if (res.locals.loggedin) {
+    next()
+  } else {
+     req.flash("notice", "Please log in.")
+     return res.redirect("/account/login")
   }
  }
 

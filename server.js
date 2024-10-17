@@ -21,6 +21,7 @@ const session = require("express-session");
 const pool = require('./database/');
 const bodyParser = require("body-parser");
 const cookieParser =  require("cookie-parser");
+ 
 /******************
  Views
  *****************/
@@ -71,7 +72,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.get("/", utilities.handleErrors(baseController.buildHome));
 app.use("/inv", utilities.handleErrors(inventoryRoute)) ;
 //w4
-app.use("/account", utilities.handleErrors(accountRoute)) ;
+ app.use("/account", utilities.handleErrors(accountRoute)) ;
 
 // app.use(main);
 
@@ -89,6 +90,8 @@ app.use(async (req, res, next) => {
 });
 
 
+
+ 
  
 
 

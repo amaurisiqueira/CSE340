@@ -178,4 +178,21 @@ async function accountLogin(req, res) {
 }
 
 
-module.exports = { buildLogin , buildRegister , registerAccount , accountLogin , accountLogin };
+
+/***********************************************
+ Managerment of Users
+ W5
+ ***********************************************/
+async function buildManagement(req, res, next) {
+   let nav = await utilities.getNav();
+    res.render(
+        "account/management", {
+        title: "Account Management",
+        nav         ,
+        errors:null ,
+      } 
+    );
+};
+ 
+
+module.exports = { buildLogin , buildRegister , registerAccount , accountLogin , accountLogin  , buildManagement};

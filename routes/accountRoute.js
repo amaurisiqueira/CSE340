@@ -30,6 +30,13 @@ router.post('/register',  regValidate.registationRules(),
                           regValidate.checkRegData,
                           utilities.handleErrors(accountController.registerAccount));
 
-
+/************************************************
+Deliver account Management View
+W5  JWT Authorization activity
+**************************************************/
+router.get(
+   "/",
+    utilities.checkLogin ,
+     utilities.handleErrors(accountController.buildManagement));
                         
 module.exports = router;                         
