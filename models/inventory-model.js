@@ -9,6 +9,9 @@ async function getClassifications(){
     "SELECT * FROM public.classification ORDER BY classification_name")
 }
 
+
+
+
 async function getInventoryByClassificationId(classification_id) {
   try {
     const data = await pool.query(
@@ -118,6 +121,21 @@ async function deleteInventoryItem(inv_id){
 }
 
 
+async function getAllInventory() {
+  try {
+    const data = await pool.query(
+      `SELECT inv_id,inv_model FROM public.inventory AS i 
+      JOIN public.classification AS c 
+      ON i.classification_id = c.classification_id 
+      ORDER BY i.inv_model `      
+    )
+    return data.rows
+  } catch (error) {
+    console.error("getclassificationsbyid error " + error)
+  }
+}
+
+
 // exports function
 module.exports = {
   getClassifications , 
@@ -128,4 +146,5 @@ module.exports = {
   checkVehicle,
   addVehicle,
   deleteInventoryItem,
+  getAllInventory,
 };

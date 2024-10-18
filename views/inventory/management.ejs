@@ -19,4 +19,24 @@
     <a class="submit_boton_global" href="/inv/add-inventory/">Add New Vehicle</a>
     </div> 
 </div>
+
+
+<form class="login_form" action="/inv/choose-action" method="post">
+    <h2 class="global_h1_title">Manage Inventory</h2>
+    <label class="login_form_input" id="classification-label">Classification <%- classification %></label>                   
+   
+    <input type="hidden" name="model_id" value="">
+
+
+    <label>
+      <input type="radio" name="action" value="modify" required> Modify
+    </label>
+
+    <label>
+            <input type="radio" name="action" value="delete" required> Delete
+    </label>
+    <input type="submit" value="Add Vehicle" class="submit_boton_global">
+</form>
+
+
  

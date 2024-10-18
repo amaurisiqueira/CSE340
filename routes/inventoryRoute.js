@@ -71,4 +71,30 @@ W5
 */
 router.post("/delete",utilities.handleErrors(invController.deleteItem));
 
+// Ruta para manejar la selección de acción 
+router.post('/inv/choose-action', (req, res) => {
+    const action = req.body.action;
+    const modelId = req.body.model_id; 
+    if (action === 'modify') {
+        // Redirigir a la ruta para modificar        
+        
+    } else if (action === 'delete') {
+        // Redirigir a la ruta para eliminar
+        res.redirect(`/inv/form-delete-inventory/${modelId}`);
+    } 
+});
+
+
+
+// Ruta para cargar el formulario de eliminación
+router.get('/inv/form-delete-inventory:id', (req, res) => {
+
+  const modelId = req.params.id;
+  // Aquí puedes cargar los datos necesarios para el formulario de eliminación
+  res.render('delete-form', {  /* datos necesarios */ });
+});
+
+
+
+
 module.exports = router;

@@ -120,6 +120,25 @@ Util.buildClassificationList = async function (classification_id = null) {
 }
 
 
+Util.buildAllInventoryList = async function (selectedModelId = null) {
+  let data = await inventoryModel.getAllInventory(); // Obtener todos los vehículos
+  let inventoryList =
+      '<select name="model_id" id="modelList" required>';
+  inventoryList += "<option value=''>Choose a Model</option>";
+  
+  data.forEach((row) => {
+      inventoryList += '<option value="' + row.inv_id + '"';
+      if (selectedModelId != null && row.inv_id == selectedModelId) {
+          inventoryList += " selected ";
+      }
+      inventoryList += ">" + row.inv_model + "</option>";
+  });
+  
+  inventoryList += "</select>";
+  return inventoryList;
+}
+
+
 /* ****************************************
 * W5 middleware to check JWT Token
 **************************************** */
