@@ -28,7 +28,7 @@ async function getInventoryByClassificationId(classification_id) {
 }
 
 /* ***************************
- *  Get vehicle details by ID
+ *  Get vehicle details by ID getInventoryByI d 
  * ************************** */
 async function getVehicleByDetId(detail_id){
   try {

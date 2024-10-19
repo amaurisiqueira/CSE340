@@ -503,7 +503,11 @@ W4
   font-size:1.25em;
   border-radius: 5px;
   box-shadow: 2px 2px 5px rgb(44, 38, 83);
-  margin-bottom:5px;
+  padding-bottom:5px;
+  margin-bottom: 0;
+  display: block;
+ 
+
  }
 
 
@@ -534,20 +538,6 @@ W4
  color: white;
  font-size: 1.5rem;
  text-align: left;
-}
-
-.login_form div{
- display: flex;
- flex-direction: row;
- align-items: center;
- justify-content: space-evenly;
-}
-.login_form a{
- color:white;
- margin-left: 10px;
-}
-.login_form a:visited{
- color:white;
 }
 
 
@@ -593,8 +583,56 @@ W4
   font-size: 1.5rem;
   text-align: left;
 }
- 
 
+.management_grid{
+  display: grid;
+  grid-template-rows: auto auto;
+  background-color: var(--BACKGROUND-COLOR-CIAN);
+  margin: 10px;
+  padding: 10px;
+  margin-bottom: 0;
+  width: 100%;
+  align-content: center;
+}
+
+.management_grid-elements{
+  grid-row: 1;
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.login_radio {
+  grid-row: 2; /* El elemento submit_boton_global en la línea 2 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   width: 200px;
+  margin-top: 10px;
+
+}
+
+
+/*
+
+
+
+
+.management_choice {
+  text-align: center;
+}
+ 
+.login_radio {
+ 
+ 
+  justify-content: center;
+  margin-top: 10px;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 10px;
+}
+
+*/
 /*
 
 

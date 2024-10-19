@@ -28,15 +28,34 @@
     <input type="hidden" name="model_id" value="">
 
 
-    <label>
-      <input type="radio" name="action" value="modify" required> Modify
-    </label>
+    
+    <div class="management_grid">
 
-    <label>
-            <input type="radio" name="action" value="delete" required> Delete
-    </label>
-    <input type="submit" value="Add Vehicle" class="submit_boton_global">
+      <div class="management_grid-elements">
+        <label class="management_choice">
+          <input type="radio" name="action" value="modify" required onclick="changeSubmitValue(this)"> Modify
+        </label>
+        <label class="management_choice">
+          <input type="radio" name="action" value="delete" required onclick="changeSubmitValue(this)"> Delete
+        </label>
+      </div>
+         
+      
+      <input type="submit" value="Proceed" class="submit_boton_global login_radio" id="submit-btn">
+
+    </div>
+  
 </form>
+<script>
+  function changeSubmitValue(radio) {
+      var submitBtn = document.getElementById('submit-btn');
+      if (radio.value === 'modify') {
+          submitBtn.value = 'Modify Inventory';
+      } else if (radio.value === 'delete') {
+          submitBtn.value = 'Delete Inventory';
+      }
+  }
+</script>
 
 
  

@@ -4,6 +4,7 @@ const router = new express.Router();
 const invController = require("../controllers/invController");
 const utilities = require("../utilities");
 const inventoryValidate = require("../utilities/inventory-validation");
+const invModel = require("../models/inventory-model");
 
 // Route to build inventory by classification view
 router.get("/type/:classificationId", invController.buildByClassificationId);
@@ -72,26 +73,40 @@ W5
 router.post("/delete",utilities.handleErrors(invController.deleteItem));
 
 // Ruta para manejar la selección de acción 
-router.post('/inv/choose-action', (req, res) => {
+router.post('/choose-action', (req, res) => {
     const action = req.body.action;
-    const modelId = req.body.model_id; 
+    const modelId = req.body.model_id[0]; 
+    console.log('modelId:',modelId);
     if (action === 'modify') {
         // Redirigir a la ruta para modificar        
         
     } else if (action === 'delete') {
         // Redirigir a la ruta para eliminar
-        res.redirect(`/inv/form-delete-inventory/${modelId}`);
+        //res.redirect(`/inv/form-delete-inventory/${modelId}`);
+        res.redirect(`/inv/delete/${modelId}`);
     } 
 });
 
 
 
 // Ruta para cargar el formulario de eliminación
-router.get('/inv/form-delete-inventory:id', (req, res) => {
-
-  const modelId = req.params.id;
-  // Aquí puedes cargar los datos necesarios para el formulario de eliminación
-  res.render('delete-form', {  /* datos necesarios */ });
+router.get('/form-delete-inventory/:id', async function (req, res){
+  
+  const modelId =  parseInt(req.params.id);
+  let nav = await utilities.getNav()
+  const itemData = await invModel.getVehicleByDetId(modelId)
+  const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+  res.render("./inventory/delete-confirm", {
+    title: "Delete " + itemName,
+    nav,
+    errors: null,
+    inv_id: itemData.inv_id,
+    inv_make: itemData.inv_make,
+    inv_model: itemData.inv_model,
+    inv_year: itemData.inv_year,
+    inv_price: itemData.inv_price
+  })
+ 
 });
 
 

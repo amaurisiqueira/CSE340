@@ -214,9 +214,14 @@ W5
  * ************************** */
 invCont.deleteView = async function (req, res, next) {
   const inv_id = parseInt(req.params.inv_id)
-  let nav = await utilities.getNav()
-  const itemData = await invModel.getInventoryById(inv_id)
-  const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+
+  console.log(inv_id);
+  let nav = await utilities.getNav();
+  const Datas = await invModel.getVehicleByDetId(inv_id);
+  const itemData =Datas [0];
+  console.log('itemData',itemData.inv_make);
+
+  const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
   res.render("./inventory/delete-confirm", {
     title: "Delete " + itemName,
     nav,
@@ -237,7 +242,16 @@ W5
 invCont.deleteItem = async function (req, res, next) {
   let nav = await utilities.getNav();
 
-  const inv_id = partseInt(req.body.inv_id);
+
+
+  console.log('DeleteItem enter');
+
+
+console.log('req.body.inv_id:',req.body.inv_id);
+
+  const inv_id = parseInt(req.body.inv_id);
+console.log('inv_id :',inv_id);
+  
   const deleteResult = await invModel.deleteInventoryItem(
     inv_id
   )
