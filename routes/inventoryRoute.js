@@ -6,16 +6,18 @@ const utilities = require("../utilities");
 const inventoryValidate = require("../utilities/inventory-validation");
 const invModel = require("../models/inventory-model");
 
+
+
 // Route to build inventory by classification view
-router.get("/type/:classificationId", invController.buildByClassificationId);
+router.get("/type/:classificationId",   invController.buildByClassificationId);
 // Route to build vehicle's info
-router.get("/detail/:detailId", invController.buildByDetailId);
+router.get("/detail/:detailId",   invController.buildByDetailId);
 //Route to edit by Inventory ID
 
 //w4
-router.get("/",  utilities.handleErrors(invController.buildManagement));
+router.get("/", utilities.checkAuthorization, utilities.handleErrors(invController.buildManagement));
 
-router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification));
+router.get("/add-classification", utilities.checkAuthorization, utilities.handleErrors(invController.buildAddClassification));
 /*
 // W4 register new users
 router.post('/register',  regValidate.registationRules(),
@@ -29,7 +31,7 @@ router.post('/register',  regValidate.registationRules(),
 
 */
 router.post(
-  "/add-classification",  
+  "/add-classification",  utilities.checkAuthorization,
   (req, res, next) => {
     const {classification_name} = req.body;
 
@@ -48,12 +50,12 @@ router.post(
 
 
 router.get(
-  "/add-inventory",
+  "/add-inventory", utilities.checkAuthorization,
   utilities.handleErrors(invController.buildAddInventory)
 );
  
 router.post(
-  "/add-inventory",
+  "/add-inventory", utilities.checkAuthorization,
   inventoryValidate.inventoryRules(),
   inventoryValidate.checkInventoryData,
   utilities.handleErrors(invController.addVehicle)
@@ -63,17 +65,17 @@ router.post(
 W5
 */
 router.get(
-  "/delete/:inv_id",
+  "/delete/:inv_id",utilities.checkAuthorization,
   utilities.handleErrors(invController.deleteView)
 );
 
 /*
 W5
 */
-router.post("/delete",utilities.handleErrors(invController.deleteItem));
+router.post("/delete", utilities.checkAuthorization, utilities.handleErrors(invController.deleteItem));
 
 // Ruta para manejar la selección de acción 
-router.post('/choose-action', (req, res) => {
+router.post('/choose-action', utilities.checkAuthorization, (req, res) => {
     const action = req.body.action;
     const modelId = req.body.model_id[0]; 
     console.log('modelId:',modelId);
@@ -90,7 +92,7 @@ router.post('/choose-action', (req, res) => {
 
 
 // Ruta para cargar el formulario de eliminación
-router.get('/form-delete-inventory/:id', async function (req, res){
+router.get('/form-delete-inventory/:id', utilities.checkAuthorization, async function (req, res){
   
   const modelId =  parseInt(req.params.id);
   let nav = await utilities.getNav()

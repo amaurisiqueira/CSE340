@@ -20,6 +20,10 @@ router.post(    '/login',
 // router.get("/login",  accountController.buildLogin  );
 
 
+router.get(
+   '/logout',
+   utilities.handleErrors(accountController.logout)
+);
 
 
 // w4    deliver registration view
@@ -35,8 +39,32 @@ Deliver account Management View
 W5  JWT Authorization activity
 **************************************************/
 router.get(
-   "/",
+   '/',
     utilities.checkLogin ,
      utilities.handleErrors(accountController.buildManagement));
-                        
+
+
+router.get(
+      '/update',
+       utilities.checkLogin ,
+        utilities.handleErrors(accountController.buildUpdate));
+   
+
+      
+//W5 update user data
+router.post('/updatePartUser',  
+      regValidate.UpdatePartUserRules(),
+      regValidate.checkUpdatePartUserData,
+      utilities.handleErrors(accountController.updatePartUserData));                       
+
+// UpdatePartPasswordRules
+
+router.post('/updatePartPassword',  
+   regValidate.UpdatePartPasswordRules(),
+   regValidate.checkUpdatePartPasswordData,
+   utilities.handleErrors(accountController.updatePartPasswordData));  
+
+
+
+
 module.exports = router;                         

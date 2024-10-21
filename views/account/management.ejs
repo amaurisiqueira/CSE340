@@ -7,10 +7,19 @@
         <%  }) %>
    </ul>
 <% } %> 
-<div>
- <h2>Welcome Happy</h2> 
+<div class="add_paddin_bottom">
+  
+ <h2>Welcome <%= authorizedData.name %></h2> 
+
+ <% if (authorizedData.isAdmin) { %>
+
+  <h3>Inventory Management</h3>
+  <a href="/inv" class="submit_boton_global management_href">Management page</a>
+ <% } %>
 
   <% if (loggedin) { %>
     <p><%= "You're logged in." %></p>
+    <a href="/account/update" class="submit_boton_global management_href ">Update your user data.</a>
   <% } %>
+
 </div>

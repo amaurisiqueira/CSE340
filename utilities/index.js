@@ -153,6 +153,8 @@ Util.checkJWTToken = (req, res, next) => {
       res.clearCookie("jwt")
       return res.redirect("/account/login")
      }
+
+     
      res.locals.accountData = accountData
      res.locals.loggedin = 1
      next()
@@ -175,5 +177,50 @@ Util.checkJWTToken = (req, res, next) => {
   }
  }
 
+
+/* ****************************************
+ *  Check   user authorization
+  W5 jwt
+ * ************************************ */
+  Util.checkAuthorization = (req, res, next) => {
+   // console.log('res.locals.accountData.account_type',res.locals.accountData.account_type);
+
+    // console.log('res.locals.accountData.account_type', res.locals.accountData.account_type.toUpperCase());
+    if(res.locals.accountData==undefined){
+      req.flash("notice", "Sorry, you don't have access.")
+      res.redirect("/account/login")
+    }else{
+      if('EMPLOYEE,ADMIN'.includes( res.locals.accountData.account_type.toUpperCase()) ){
+        next()
+      } else {
+         req.flash("notice", "Sorry, you don't have access.")
+          res.redirect("/account/login")
+      }
+    }
+   
+  }
+   
+
+  Util.getAuthorizedName = (res) => {
+
+    if (!res.locals.accountData) {
+      return { 'name': 'Unknown', 'isAdmin':false};
+    }
+         
+    return { 'name': res.locals.accountData.account_firstname
+        , 'isAdmin':  'EMPLOYEE,ADMIN'.includes( res.locals.accountData.account_type.toUpperCase())
+    }
+    ;
+  };
+  
+
+
+  Util.getAllAccountData = (res) => {
+    if (!res.locals.accountData) {
+      return null;
+    }
+    return res.locals.accountData;
+  };
+  
 
 module.exports = Util;
