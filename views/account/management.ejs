@@ -9,11 +9,11 @@
 <% } %> 
 <div class="add_paddin_bottom">
   
- <h2>Welcome <%= authorizedData.name %></h2> 
-
+ <div class="main_common-h2"  >Welcome <%= authorizedData.name %></div> 
+ 
  <% if (authorizedData.isAdmin) { %>
 
-  <h3>Inventory Management</h3>
+  <h2 class="main_common-h2 margin_top_30px" >Inventory Management</h2>
   <a href="/inv" class="submit_boton_global management_href">Management page</a>
  <% } %>
 

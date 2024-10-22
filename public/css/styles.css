@@ -71,6 +71,14 @@ body {
   font-size: 1.3em;
   
 }
+
+.main_common-h2{
+  padding: 0;
+  margin: 0;
+  font-size: 1.2em;
+  
+}
+
 .main {
   margin-bottom: 0;
   padding-bottom: 0;
@@ -508,6 +516,9 @@ W4
 
 .margin_top_10px{
   margin-top: 10px;
+}
+.margin_top_30px{
+  margin-top: 30px;
 }
 .submit_boton_global{
   /*
