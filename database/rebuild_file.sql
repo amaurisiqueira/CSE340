@@ -50,6 +50,24 @@ REFERENCES public.classification (classification_id) MATCH SIMPLE
 ON UPDATE CASCADE
 ON DELETE NO ACTION;
 
+
+CREATE TABLE IF NOT EXISTS public.inventory_sale
+(
+    inv_id integer NOT NULL ,    
+    inv_discount  numeric (9, 0) NOT NULL,    
+    CONSTRAINT inventory_sale_pkey PRIMARY KEY (inv_id)
+);
+
+ALTER TABLE IF EXISTS public.inventory_sale
+ADD CONSTRAINT fk_inventory_sale_constrain FOREIGN KEY (inv_id)
+REFERENCES public.inventory (inv_id) MATCH SIMPLE
+ON UPDATE CASCADE
+ON DELETE NO ACTION;
+
+
+
+
+
  /* 
  select * from public.account;
  

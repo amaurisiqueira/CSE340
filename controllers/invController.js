@@ -108,10 +108,12 @@ invCont.addClassification = async function (req, res, next) {
 
      
     // const view = utilities.buildLoginView();
+    let classificationList = await utilities.buildAllInventoryList();
     let nav = await utilities.getNav();
     res.status(201).render("inventory/management", {
       title: "Vehicle Management",
       nav,
+      classification: classificationList,
       errors: null,
        
     });
@@ -174,12 +176,22 @@ invCont.addVehicle = async function (req, res, next) {
       "notice",
       `Congratulations, you\'ve added  ${inv_make} ${inv_model}.`
     );
+
+    /*  let classificationList = await utilities.buildAllInventoryList();
+
+  res.render("inventory/management", {
+    title: title,
+    nav,     
+    classification: classificationList,
+    errors: null,
+  }); */
     // const view = utilities.buildLoginView();
-    let classificationList = await utilities.buildClassificationList();
+    //let classificationList = await utilities.buildClassificationList();
+    let classificationList = await utilities.buildAllInventoryList();
     res.status(201).render("inventory/management", {
       title: "Vehicle Management",
       nav,
-      classificationList,
+      classification: classificationList,
       errors: null,
       // view,
     });
@@ -256,8 +268,7 @@ console.log('inv_id :',inv_id);
     inv_id
   )
 
-  if (deleteResult) {
-    
+  if (deleteResult) {    
     req.flash("notice", `The deletion was successfully.`)
     res.redirect("/inv/")
   } else {
@@ -269,5 +280,62 @@ console.log('inv_id :',inv_id);
 
 
 }//--------------
+
+
+invCont.chooseAction =  async function (req, res){
+  const action = req.body.action;
+  const modelId = req.body.model_id[0]; 
+  console.log('modelId:',modelId);
+  if (action === 'modify') {
+      // Redirigir a la ruta para modificar        
+      
+  } else if (action === 'delete') {
+      // Redirigir a la ruta para eliminar
+      //res.redirect(`/inv/form-delete-inventory/${modelId}`);
+      res.redirect(`/inv/delete/${modelId}`);
+  } 
+}//-------------------
+
+
+
+invCont.formDeleteInventory = async function (req, res){
+  
+  const modelId =  parseInt(req.params.id);
+  let nav = await utilities.getNav()
+  const itemData = await invModel.getVehicleByDetId(modelId)
+  const itemName = `${itemData.inv_make} ${itemData.inv_model}`
+  res.render("./inventory/delete-confirm", {
+    title: "Delete " + itemName,
+    nav,
+    errors: null,
+    inv_id: itemData.inv_id,
+    inv_make: itemData.inv_make,
+    inv_model: itemData.inv_model,
+    inv_year: itemData.inv_year,
+    inv_price: itemData.inv_price
+  })
+ 
+}
+
+
+/*
+
+Final 
+*/
+invCont.inventoryOnSales = async function (req, res){
+    
+  let nav = await utilities.getNav() ;
+  let classificationList = await utilities.buildAllInventoryList();
+
+  res.render("./inventory/inventory-on-sales", {
+    title: "Inventory on Sale ",
+    nav,
+    errors: null,
+    classification: classificationList,
+  })
+ 
+}
+
+
 
 module.exports = invCont;

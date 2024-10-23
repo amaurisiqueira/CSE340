@@ -102,8 +102,12 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 
 Util.buildClassificationList = async function (classification_id = null) {
   let data = await inventoryModel.getClassifications()
+
+console.log( "Util.buildClassificationList.data: " ,data) ;
+
   let classificationList =
-    '<select name="classification_id" id="classificationList" required>'
+
+  '<select name="classification_id" id="classificationList" required>'
   classificationList += "<option value=''>Choose a Classification</option>"
   data.rows.forEach((row) => {
     classificationList += '<option value="' + row.classification_id + '"'

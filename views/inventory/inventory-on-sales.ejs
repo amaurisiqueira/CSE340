@@ -1,0 +1,17 @@
+  <% if (title) { %>
+    <h1 class="global_h1_title"><%= title %></h1>
+      <% } else {
+        res.redirect('/')
+      } %>
+  <%- notices()   %>  
+    
+  <form class="login_form" action="/inv/inventory-on-sales" method="post">
+      
+      <label class="login_form_input" id="classification-label">Classification <%- classification %></label>                        
+      <input type="hidden" name="model_id" value="">
+
+        
+      
+    
+  </form>
+   

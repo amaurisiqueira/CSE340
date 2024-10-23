@@ -537,7 +537,7 @@ W4
   border-radius: 5px;
   box-shadow: 2px 2px 5px rgb(44, 38, 83);
   padding-bottom:5px;
-  margin-bottom: 0;
+  /*-- margin-bottom: 0;*/
   display: block;
  
 

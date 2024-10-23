@@ -75,41 +75,18 @@ W5
 router.post("/delete", utilities.checkAuthorization, utilities.handleErrors(invController.deleteItem));
 
 // Ruta para manejar la selección de acción 
-router.post('/choose-action', utilities.checkAuthorization, (req, res) => {
-    const action = req.body.action;
-    const modelId = req.body.model_id[0]; 
-    console.log('modelId:',modelId);
-    if (action === 'modify') {
-        // Redirigir a la ruta para modificar        
-        
-    } else if (action === 'delete') {
-        // Redirigir a la ruta para eliminar
-        //res.redirect(`/inv/form-delete-inventory/${modelId}`);
-        res.redirect(`/inv/delete/${modelId}`);
-    } 
-});
-
-
-
-// Ruta para cargar el formulario de eliminación
-router.get('/form-delete-inventory/:id', utilities.checkAuthorization, async function (req, res){
+router.post('/choose-action', utilities.checkAuthorization,     utilities.handleErrors( invController.chooseAction ));
   
-  const modelId =  parseInt(req.params.id);
-  let nav = await utilities.getNav()
-  const itemData = await invModel.getVehicleByDetId(modelId)
-  const itemName = `${itemData.inv_make} ${itemData.inv_model}`
-  res.render("./inventory/delete-confirm", {
-    title: "Delete " + itemName,
-    nav,
-    errors: null,
-    inv_id: itemData.inv_id,
-    inv_make: itemData.inv_make,
-    inv_model: itemData.inv_model,
-    inv_year: itemData.inv_year,
-    inv_price: itemData.inv_price
-  })
- 
-});
+  
+// Ruta para cargar el formulario de eliminación
+router.get('/form-delete-inventory/:id',utilities.checkAuthorization,   utilities.handleErrors ( invController.formDeleteInventory));
+
+
+
+
+// final
+router.get('/inventory-on-sales', utilities.checkAuthorization,   utilities.handleErrors ( invController.inventoryOnSales) );
+
 
 
 
