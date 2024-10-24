@@ -222,7 +222,7 @@ async function logout (req, res){
  ***********************************************/
  async function buildUpdate(req, res, next) {
   let nav = await utilities.getNav();
-  //const  userData =utilities.getAllAccountData (res);
+ 
  
    res.render(
        "account/update", {

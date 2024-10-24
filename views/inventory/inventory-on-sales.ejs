@@ -8,10 +8,60 @@
   <form class="login_form" action="/inv/inventory-on-sales" method="post">
       
       <label class="login_form_input" id="classification-label">Classification <%- classification %></label>                        
-      <input type="hidden" name="model_id" value="">
-
-        
-      
-    
+       <input type="hidden" name="model_id" value="">
   </form>
-   
+
+
+  <div id="detailsVehicleContainer">
+    <!-- Aquí se cargarán los detalles del vehículo -->
+  </div>
+
+
+  <script>
+
+
+  const elemntList = document.getElementById('modelList');
+  console.log("elemntList:",elemntList);
+
+  if(elemntList){
+
+     
+    function loadVehicleDetails(event) {
+
+
+      //  
+      // const modelId =( document.querySelector('input[name="model_id"]').value) ;    
+      // console.log('loadVehicleDetails.modelId:', modelId);
+
+      
+        const vehicleId =  parseInt( event.target.value);
+        console.log( 'before vehicleId:', vehicleId );
+
+        if (vehicleId) {
+
+          console.log( 'vehicleId:', vehicleId );
+                 ///inventory-on-sales/check/:id          
+            fetch(`/inv/vehicle-on-sales-details-check/${vehicleId}`)
+
+                .then(response => response.text())
+                .then(data => {
+
+  console.log('loadVehicleDetails(events).data:',data );
+
+                    document.getElementById('detailsVehicleContainer').innerHTML = data;
+                });
+        }
+    }
+
+    elemntList.addEventListener('change', loadVehicleDetails);
+
+
+
+  }//----
+
+
+
+
+
+
+  </script> 

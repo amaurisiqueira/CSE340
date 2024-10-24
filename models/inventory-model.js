@@ -136,6 +136,39 @@ async function getAllInventory() {
 }
 
 
+
+async function getVehicleIsOnSale(vehicleId){
+  try {
+    const sql = "select i.inv_id , is2.inv_discount from public.inventory i left join public.inventory_sale is2 on i.inv_id = is2.inv_id where i.inv_id = $1"
+    const vehicle = await pool.query(sql, [vehicleId])    
+
+
+
+    if(vehicle.rowCount>0){
+
+      console.log(vehicle.rows[0].inv_id, '  discount ', vehicle.rows[0].inv_discount );
+      return {
+        id: vehicle.rows[0].inv_id,
+        isOnSale: parseInt(vehicle.rows[0].inv_discount)>0  ? true : false , 
+      }
+    }
+
+
+    return {
+      id: vehicleId,
+      isOnSale: false , 
+    }
+
+    
+  } catch (error) {
+      return error.message
+  }
+  }   
+
+
+
+
+
 // exports function
 module.exports = {
   getClassifications , 
@@ -147,4 +180,5 @@ module.exports = {
   addVehicle,
   deleteInventoryItem,
   getAllInventory,
+  getVehicleIsOnSale,
 };

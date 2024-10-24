@@ -1,6 +1,9 @@
 const invModel = require("../models/inventory-model");
 const utilities = require("../utilities/");
 
+const ejs = require('ejs');
+
+
 const invCont = {};
 /* **************************************** *
  *  Build inventory by classification view  *
@@ -320,7 +323,7 @@ invCont.formDeleteInventory = async function (req, res){
 
 /*
 
-Final 
+W6 Final 
 */
 invCont.inventoryOnSales = async function (req, res){
     
@@ -338,4 +341,65 @@ invCont.inventoryOnSales = async function (req, res){
 
 
 
+
+invCont.inventoryOnSalesCheckOnSale = async function (req, res){
+    
+  //let nav = await utilities.getNav() ;
+  
+console.log('ENTRA ----> invCont.inventoryOnSalesCheckOnSale = async function (req, res)');
+
+  const vehicleId = req.params.id;
+  
+  let classificationList = await utilities.getVehicleIsOnSale(vehicleId);
+  console.log( ' classificationList:',  classificationList );
+  
+
+
+//res.render('inventory/vehicle-with-discount', { vehicleId ,  layout: 'false' } );
+  if (classificationList.isOnSale) {
+      res.render('inventory/vehicle-with-discount', { vehicleId  ,  layout: false } );
+  } else {
+      res.render('inventory/vehicle-without-discount', { vehicleId ,  layout: false});
+  }
+      
+
+
+
+}//
+
 module.exports = invCont;
+
+
+/*
+delete
+
+ if (classificationList.isOnSale ) {
+
+        
+            ejs.renderFile('views/inventory/vehicle-with-discount.ejs', { vehicleId }, (err, str) => {
+              if (err) {
+                res.status(500).send('Error rendering view');
+              } else {
+
+
+                console.log('str :',str );
+                res.send(str);  // Enviar solo el HTML renderizado
+              }
+            });
+
+
+} else {
+
+  ejs.renderFile('views/inventory/vehicle-without-discount.ejs', { vehicleId }, (err, str) => {
+    if (err) {
+      res.status(500).send('Error rendering view');
+    } else {
+
+      console.log('str :',str );
+      res.send(str);  // Enviar solo el HTML renderizado
+    }
+  });
+}
+
+
+*/

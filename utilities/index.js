@@ -103,7 +103,7 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 Util.buildClassificationList = async function (classification_id = null) {
   let data = await inventoryModel.getClassifications()
 
-console.log( "Util.buildClassificationList.data: " ,data) ;
+  console.log( "Util.buildClassificationList.data: " ,data) ;
 
   let classificationList =
 
@@ -219,12 +219,19 @@ Util.checkJWTToken = (req, res, next) => {
   
 
 
-  Util.getAllAccountData = (res) => {
-    if (!res.locals.accountData) {
-      return null;
+
+
+  /*
+
+W6
+  */
+    Util.getVehicleIsOnSale = async function (vehicleId) {
+
+      let data = await inventoryModel.getVehicleIsOnSale(vehicleId);
+      return data
     }
-    return res.locals.accountData;
-  };
-  
+      
+      
+
 
 module.exports = Util;

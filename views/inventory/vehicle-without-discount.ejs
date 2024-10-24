@@ -1,0 +1,6 @@
+<h2><%= vehicleId %> - No tiene descuento</h2>
+<form action="/add-discount/<%= vehicleId %>" method="POST">
+    <label for="discount">Ingrese Descuento:</label>
+    <input type="number" name="discount" id="discount" required>
+    <button type="submit">Agregar Descuento</button>
+</form>

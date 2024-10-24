@@ -83,10 +83,15 @@ router.get('/form-delete-inventory/:id',utilities.checkAuthorization,   utilitie
 
 
 
-
-// final
+//W6 final enhencement 
 router.get('/inventory-on-sales', utilities.checkAuthorization,   utilities.handleErrors ( invController.inventoryOnSales) );
 
+
+
+// Error at: "/inv/vehicle-on-sale-details/check/6": Sorry, we appear to have lost that page.
+
+
+router.get('/vehicle-on-sales-details-check/:id',  utilities.checkAuthorization,   utilities.handleErrors ( invController.inventoryOnSalesCheckOnSale) );
 
 
 
