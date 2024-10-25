@@ -150,6 +150,7 @@ async function getVehicleIsOnSale(vehicleId){
       return {
         id: vehicle.rows[0].inv_id,
         isOnSale: parseInt(vehicle.rows[0].inv_discount)>0  ? true : false , 
+        discount: vehicle.rows[0].inv_discount,
       }
     }
 
@@ -167,6 +168,15 @@ async function getVehicleIsOnSale(vehicleId){
 
 
 
+  async function inventoryOnSalesSetDiscount(vehicleId,discount){
+   const sql = "insert into public.inventory_sale (inv_id,inv_discount)values($1,$2) RETURNING *";
+    try{
+      return await pool.query(sql, [vehicleId,discount]);    
+    } catch (error) {
+      return error.message
+    }
+  };
+
 
 
 // exports function
@@ -181,4 +191,5 @@ module.exports = {
   deleteInventoryItem,
   getAllInventory,
   getVehicleIsOnSale,
+  inventoryOnSalesSetDiscount,
 };

@@ -343,63 +343,62 @@ invCont.inventoryOnSales = async function (req, res){
 
 
 invCont.inventoryOnSalesCheckOnSale = async function (req, res){
-    
-  //let nav = await utilities.getNav() ;
-  
-console.log('ENTRA ----> invCont.inventoryOnSalesCheckOnSale = async function (req, res)');
-
+  //let nav = await utilities.getNav() ;  
+  //console.log('ENTRA ----> invCont.inventoryOnSalesCheckOnSale = async function (req, res)');
   const vehicleId = req.params.id;
+
+
+  console.log('invCont.inventoryOnSalesCheckOnSale = async function (req, res)     vehicleId: ', vehicleId );
   
   let classificationList = await utilities.getVehicleIsOnSale(vehicleId);
   console.log( ' classificationList:',  classificationList );
   
 
-
-//res.render('inventory/vehicle-with-discount', { vehicleId ,  layout: 'false' } );
+    //res.render('inventory/vehicle-with-discount', { vehicleId ,  layout: 'false' } );
   if (classificationList.isOnSale) {
-      res.render('inventory/vehicle-with-discount', { vehicleId  ,  layout: false } );
+      res.render('inventory/vehicle-with-discount', { inv_id : vehicleId  , inv_discount: classificationList.discount ,  layout: false } );
   } else {
-      res.render('inventory/vehicle-without-discount', { vehicleId ,  layout: false});
+      res.render('inventory/vehicle-without-discount', { inv_id : vehicleId , inv_discount:0 , layout: false});
   }
-      
-
-
 
 }//
 
+
+
+invCont.inventoryOnSalesSetDiscount = async function (req, res){
+    
+  // let nav = await utilities.getNav() ;
+  const inv_id = parseInt(req.body.inv_id);  
+  const inv_discount =  parseInt(req.body.inv_discount);
+
+  console.log('invCont.inventoryOnSalesSetDiscount = async function (req, res)    inv_id:', inv_id , '  inv_discount:', inv_discount );
+      
+  let result = await utilities.inventoryOnSalesSetDiscount(inv_id,inv_discount );
+
+  console.log(result.rowCount);
+  
+  if(result.rowCount){// .  
+    req.flash(
+        "notice",
+          "Discount added successfull "
+      );
+  }else{
+
+    req.flash(
+      "notice",
+        "ERROR adding Discount"
+    );
+
+  }
+  
+  
+///inventory/inventory-on-sales
+  res.redirect("/inv/inventory-on-sales");
+//`Congratulations, you\'ve added  ${result.resp}.`
+  
+
+
+ }
+
 module.exports = invCont;
 
-
-/*
-delete
-
- if (classificationList.isOnSale ) {
-
-        
-            ejs.renderFile('views/inventory/vehicle-with-discount.ejs', { vehicleId }, (err, str) => {
-              if (err) {
-                res.status(500).send('Error rendering view');
-              } else {
-
-
-                console.log('str :',str );
-                res.send(str);  // Enviar solo el HTML renderizado
-              }
-            });
-
-
-} else {
-
-  ejs.renderFile('views/inventory/vehicle-without-discount.ejs', { vehicleId }, (err, str) => {
-    if (err) {
-      res.status(500).send('Error rendering view');
-    } else {
-
-      console.log('str :',str );
-      res.send(str);  // Enviar solo el HTML renderizado
-    }
-  });
-}
-
-
-*/

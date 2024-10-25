@@ -180,4 +180,97 @@ validate.checkInventoryData = async (req, res, next) => {
 };
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+/***********************************
+ *  Set Sales validation Rules
+ * ********************************* */
+validate.inventorySetSalesRules = () => {
+
+console.log('ENTRA EN validate.inventorySetSalesRules = () ');
+
+
+  return [
+    // firstname is required and must be string
+    body("inv_id")
+      .trim()
+      .escape()
+      .notEmpty().withMessage("Please provide a vehicle ID corect.")
+      .isNumeric().withMessage("Please enter just numbers for vehicle ID"),
+       
+    body("inv_discount")
+      .trim()
+      .escape()
+      .notEmpty().withMessage("Please provide a dicount corect.")
+      .isNumeric().withMessage("Please enter just numbers for discount")
+      .bail()
+      .isInt({ min: 1, max: 99 }).withMessage("Discount must be an integer between 1 and 99.")
+      ,
+
+  ];
+};
+
+
+
+
+
+/* ******************************
+ * Check data for set discount 
+ * ***************************** */
+validate.checkinventorySetSalesData = async (req, res, next) => {
+  const {
+    inv_id,
+    inv_discount,
+  } = req.body;
+  let errors = [];
+
+console.log( '-----------------------------------------------------------------------');  
+console.log( '  validate.checkinventorySetSalesData = async (req, res, next) => ');
+console.log( 'inv_id:', inv_id , ' inv_discount:',inv_discount );
+console.log( '-----------------------------------------------------------------------');  
+
+  errors = validationResult(req);
+  if (!errors.isEmpty()) {
+        
+   
+//    let classificationList = await utilities.buildAllInventoryList();
+
+/* 
+    res.render("inventory/vehicle-without-discount", {
+      title: "Inventory on Sale ",
+       errors: null,
+       inv_id , inv_discount,
+       layout:false
+    })
+*/
+
+
+      let nav = await utilities.getNav() ;
+      let classificationList = await utilities.buildAllInventoryList();
+      
+      res.render("./inventory/inventory-on-sales", {
+        title: "Inventory on Sale ",
+        nav,
+        errors,
+        classification: classificationList,
+      })
+
+
+    return;
+  }
+  next();
+};
+
+
+
 module.exports = validate;

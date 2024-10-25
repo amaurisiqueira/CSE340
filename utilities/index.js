@@ -231,7 +231,16 @@ W6
       return data
     }
       
-      
+
+  Util.inventoryOnSalesSetDiscount = async function (vehicleId,discount) {
+    
+    let data = await inventoryModel.inventoryOnSalesSetDiscount(vehicleId,discount);
+
+    console.log(' Util.inventoryOnSalesSetDiscount = async function (vehicleId,discount) :' , data);
+    return data    
+  } 
+
+
 
 
 module.exports = Util;

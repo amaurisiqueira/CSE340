@@ -94,6 +94,16 @@ router.get('/inventory-on-sales', utilities.checkAuthorization,   utilities.hand
 router.get('/vehicle-on-sales-details-check/:id',  utilities.checkAuthorization,   utilities.handleErrors ( invController.inventoryOnSalesCheckOnSale) );
 
 
+/*router.post('/inventory-on-sales-set/:id/:discount', 
+  inventoryValidate.inventorySetSalesRules(),
+  inventoryValidate.checkinventorySetSalesData ,  
+  utilities.checkAuthorization,   utilities.handleErrors ( invController.inventoryOnSalesSetDiscount) );
+*/
+
+router.post('/inventory-on-sales-set', 
+  inventoryValidate.inventorySetSalesRules(),
+  inventoryValidate.checkinventorySetSalesData ,  
+  utilities.checkAuthorization,   utilities.handleErrors ( invController.inventoryOnSalesSetDiscount) );
 
 
 module.exports = router;

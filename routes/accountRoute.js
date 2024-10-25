@@ -34,6 +34,7 @@ router.post('/register',  regValidate.registationRules(),
                           regValidate.checkRegData,
                           utilities.handleErrors(accountController.registerAccount));
 
+                          
 /************************************************
 Deliver account Management View
 W5  JWT Authorization activity

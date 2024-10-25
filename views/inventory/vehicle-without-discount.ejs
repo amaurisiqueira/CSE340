@@ -1,6 +1,10 @@
-<h2><%= vehicleId %> - No tiene descuento</h2>
-<form action="/add-discount/<%= vehicleId %>" method="POST">
+<h2><%= inv_id %> - No tiene descuento</h2>
+<form action="/inv/inventory-on-sales-set" method="POST">
     <label for="discount">Ingrese Descuento:</label>
-    <input type="number" name="discount" id="discount" required>
+    <input type="hidden" name="inv_id" value="<%= inv_id %>">
+    
+    <!-- Cambiamos el name del campo a "inv_discount" para evitar duplicidad -->
+    <input type="number" min="1" max="99" name="inv_discount" id="discount" required>
+    
     <button type="submit">Agregar Descuento</button>
 </form>

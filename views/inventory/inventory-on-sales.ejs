@@ -3,12 +3,25 @@
       <% } else {
         res.redirect('/')
       } %>
-  <%- notices()   %>  
+
+  
+
+
+  <%- notices() %>
+  <% if (errors) { %>
+    <ul class="notice">
+        <% errors.array().forEach(error => { %>
+            <li><%= error.msg %></li>
+        <%  }) %>
+   </ul>
+  <% } %> 
     
   <form class="login_form" action="/inv/inventory-on-sales" method="post">
       
       <label class="login_form_input" id="classification-label">Classification <%- classification %></label>                        
        <input type="hidden" name="model_id" value="">
+
+       <input type="hidden" name="inv_id" id="inv_id"  value="">
   </form>
 
 
@@ -21,7 +34,7 @@
 
 
   const elemntList = document.getElementById('modelList');
-  console.log("elemntList:",elemntList);
+  console.log("*******elemntList:",elemntList);
 
   if(elemntList){
 
@@ -29,19 +42,38 @@
     function loadVehicleDetails(event) {
 
 
-      //  
+        
+
+
       // const modelId =( document.querySelector('input[name="model_id"]').value) ;    
       // console.log('loadVehicleDetails.modelId:', modelId);
 
       
-        const vehicleId =  parseInt( event.target.value);
-        console.log( 'before vehicleId:', vehicleId );
+        const inv_id =  parseInt( event.target.value);
+        console.log( 'before vehicleId:', inv_id );
 
-        if (vehicleId) {
+        
 
-          console.log( 'vehicleId:', vehicleId );
+
+
+
+        if (inv_id) {
+
+          let objinv_id = document.getElementById('inv_id');
+         if( objinv_id){
+
+          objinv_id.value=inv_id ;
+
+          console.log( '** let objinv_id = document.getElementById(inv_id);:', objinv_id );
+
+         }
+
+
+
+
+          console.log( 'vehicleId:', inv_id );
                  ///inventory-on-sales/check/:id          
-            fetch(`/inv/vehicle-on-sales-details-check/${vehicleId}`)
+            fetch(`/inv/vehicle-on-sales-details-check/${inv_id}`)
 
                 .then(response => response.text())
                 .then(data => {
