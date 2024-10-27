@@ -44,6 +44,34 @@ Util.buildClassificationGrid = async function(data){
         
         grid += '<li class="grid_classification_item">'
         
+        if( parseInt(vehicle.inv_discount)>0) {
+
+
+          grid +=  '<a class="grid_classification_item-a" href="../../inv/detail/'+ vehicle.inv_id 
+          + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
+          + 'details"> <img  class="grid_classification_item-image" src="' + vehicle.inv_thumbnail 
+          +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
+          +' on CSE Motors"> </a>    '
+          
+          grid += ' <img src="/images/site/sale.png" alt="On Sale" class="on-sale-image"> '
+
+
+          grid += ' <div class="grid_classification_item-namePrice">'
+          
+          grid += ' <h2 class="grid_classification_item-model" >'
+          grid += ' <a  class="grid_classification_item-a" href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
+          + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
+          + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
+          grid += '</h2>'
+          grid += '<span class="grid_classification_item-price-old">$' + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
+          grid += '<span class="grid_classification_item-price">$' + new Intl.NumberFormat('en-US').format(vehicle.inv_price * ((  100 - vehicle.inv_discount )/100) ) + '</span>'    
+          grid += '<span class="grid_classification_item-price-discount">-' +  vehicle.inv_discount + '%</span>'     
+          grid += '</div>' ;
+
+
+        }else { 
+
+        
         grid +=  '<a class="grid_classification_item-a" href="../../inv/detail/'+ vehicle.inv_id 
         + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
         + 'details"> <img  class="grid_classification_item-image" src="' + vehicle.inv_thumbnail 
@@ -58,8 +86,15 @@ Util.buildClassificationGrid = async function(data){
         + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
         grid += '</h2>'
         grid += '<span class="grid_classification_item-price">$' + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
-        grid += '</div> </li> '
-      })
+        grid += '</div>' ;
+      
+        }
+
+        grid += '</li> ';
+
+      }
+    
+    )
       grid += '</ul>'
     } else { 
       grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
@@ -73,7 +108,44 @@ Util.buildClassificationGrid = async function(data){
     if(data.length > 0){
       grid = '<div class="vehicle_detail">'
       data.forEach(vehicle => {
-        grid += '<img class="vehicle_detail-image" src="' + vehicle.inv_image + '" alt="Image of '
+
+        if( parseInt(vehicle.inv_discount)>0) {
+
+          grid += '<img class="vehicle_detail-image" src="' + vehicle.inv_image + '" alt="Image of '
+        + vehicle.inv_make + ' ' + vehicle.inv_model+'">'
+
+         grid += ' <img src="/images/site/sale.png" alt="On Sale" class="on-sale-image"> '
+
+        grid += '<div class="vehicle_detail-container">'
+        grid += '<h2 class="vehicle_detail-title">' + vehicle.inv_make + ' ' + vehicle.inv_model + " Details" +'</h2>'
+        grid += '<div class="vehicle_detail-descriptions">'
+    
+    
+        grid += '<p class="vehicle_detail-descriptions-back"><strong>Price: ' 
+        
+        
+     
+
+        grid += '<span class="grid_classification_item-price-old">$' + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
+        grid += '<span class="grid_classification_item-price">$' + new Intl.NumberFormat('en-US').format( vehicle.inv_price * ((  100 - vehicle.inv_discount )/100) )+ '</span>'    
+              
+        grid += '<span class="grid_classification_item-price-discount">(' +  vehicle.inv_discount + '% OFF)</span>'     
+        grid += '</strong></p>'
+    
+    
+        grid += '<p><strong>Description:</strong> ' + vehicle.inv_description +'</p>'
+        grid += '<p class="vehicle_detail-descriptions-back"><strong>Color:</strong> ' + vehicle.inv_color +'</p>'
+        grid += '<p><strong>Miles:</strong> ' +new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</p>'
+
+
+
+
+        grid += '</div>'
+        grid += '</div>'
+
+        }else{
+
+          grid += '<img class="vehicle_detail-image" src="' + vehicle.inv_image + '" alt="Image of '
         + vehicle.inv_make + ' ' + vehicle.inv_model+'">'
         grid += '<div class="vehicle_detail-container">'
         grid += '<h2 class="vehicle_detail-title">' + vehicle.inv_make + ' ' + vehicle.inv_model + " Details" +'</h2>'
@@ -84,6 +156,12 @@ Util.buildClassificationGrid = async function(data){
         grid += '<p><strong>Miles:</strong> ' +new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</p>'
         grid += '</div>'
         grid += '</div>'
+
+        }
+        
+
+        
+
       })
       grid += '</div>'
     }else {
@@ -240,7 +318,10 @@ W6
     return data    
   } 
 
-
-
+  
+  Util.inventoryOnSalesDelDiscount = async function (vehicleId) {
+    let data = await inventoryModel.inventoryOnSalesDetDiscount(vehicleId);
+    return data    
+  } 
 
 module.exports = Util;

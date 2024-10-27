@@ -1,10 +1,15 @@
-<h2><%= inv_id %> - No tiene descuento</h2>
+<h2 class="main_common-h2"><%= inv_id %> - No discount</h2>
 <form action="/inv/inventory-on-sales-set" method="POST">
-    <label for="discount">Ingrese Descuento:</label>
+    
+    
+    <label class="main_common-h2" for="discount">Input a Discount:
+        <input type="number" min="1" max="99" name="inv_discount" id="discount" required> % 
+    </label>
+
     <input type="hidden" name="inv_id" value="<%= inv_id %>">
     
     <!-- Cambiamos el name del campo a "inv_discount" para evitar duplicidad -->
-    <input type="number" min="1" max="99" name="inv_discount" id="discount" required>
     
-    <button type="submit">Agregar Descuento</button>
+    
+    <button class="submit_boton_global margin_top_30px" submit">Add Discount</button>
 </form>

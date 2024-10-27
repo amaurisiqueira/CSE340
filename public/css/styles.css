@@ -352,6 +352,7 @@ comienza sitio  semana 3
   margin: 0;
   padding: 0;
   height: 100%;
+  position: relative;
 
 }
 .grid_classification_item-h{
@@ -404,12 +405,35 @@ comienza sitio  semana 3
    
 }
 
+.grid_classification_item-price-old{
+
+  margin: 0;
+  padding: 0;
+  padding-top: 10px;
+  padding-bottom: 10px; 
+  padding-right: 10px;
+  color: #999;
+  text-decoration: line-through;
+}
 
 .grid_classification_item-price{
   margin: 0;
   padding: 0;
   padding-top: 20px;
   padding-bottom: 10px;
+}
+ 
+.grid_classification_item-price-discount {
+  color: red;
+  font-weight: 600;
+  padding: 0;
+  margin: 0;
+  padding-left: 10px;
+}
+.on-sale-image {
+  position: absolute;
+  margin: 10px; /* Espaciado entre los elementos */
+  width: 50px; /* Ajusta el ancho según sea necesario */
 }
 
 .vehicle_detail{
@@ -430,6 +454,7 @@ comienza sitio  semana 3
 }
 
 .vehicle_detail-image{
+  position: relative;
   grid-column: 1/2;
   grid-row: 1/2;
   width: 100%;
@@ -488,8 +513,9 @@ comienza sitio  semana 3
   
 
     .notice {
-      background-color: rgba(167, 237, 168, 0.357);
+      background-color: rgba(167, 237, 168, 0.1);
       color: red; /* Color del texto */    
+      font-weight: 600;
       margin: 10px 2px; /* Margen */
       text-decoration: none;
       margin-left: 0;
@@ -645,6 +671,11 @@ W4
 
 }
 
+
+#detailsVehicleContainer {
+  margin-top: 0;
+
+}
 
 /*
 

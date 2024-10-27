@@ -10,14 +10,19 @@ async function getClassifications(){
 }
 
 
-
-
+/*
+SELECT * FROM public.inventory AS i 
+      JOIN public.classification AS c 
+      ON i.classification_id = c.classification_id 
+      WHERE i.classification_id =
+*/
 async function getInventoryByClassificationId(classification_id) {
   try {
     const data = await pool.query(
-      `SELECT * FROM public.inventory AS i 
+      `SELECT i.*,c.*, inv_sales.inv_discount FROM public.inventory AS i 
       JOIN public.classification AS c 
       ON i.classification_id = c.classification_id 
+	  left join  public.inventory_sale as inv_sales ON i.inv_id = inv_sales.inv_id   
       WHERE i.classification_id = $1`,
       [classification_id]
     )
@@ -28,13 +33,17 @@ async function getInventoryByClassificationId(classification_id) {
 }
 
 /* ***************************
- *  Get vehicle details by ID getInventoryByI d 
+ *  Get vehicle details by ID getInventoryByI d
+
+SELECT * FROM public.inventory AS i
+      WHERE i.inv_id =
  * ************************** */
 async function getVehicleByDetId(detail_id){
   try {
     const data = await pool.query(
-      `SELECT * FROM public.inventory AS i
-      WHERE i.inv_id = $1`,
+      `  SELECT *,inv_sales.inv_discount  FROM public.inventory AS i 
+	  left join  public.inventory_sale as inv_sales ON i.inv_id = inv_sales.inv_id  
+      WHERE i.inv_id =  $1`,
       [detail_id]
     )
     return data.rows
@@ -177,8 +186,15 @@ async function getVehicleIsOnSale(vehicleId){
     }
   };
 
-
-
+  
+  async function inventoryOnSalesDetDiscount(vehicleId){
+    const sql = "delete from public.inventory_sale WHERE inv_id = $1 RETURNING *";
+     try{
+       return await pool.query(sql, [vehicleId]);    
+     } catch (error) {
+       return error.message
+     }
+   };
 // exports function
 module.exports = {
   getClassifications , 
@@ -192,4 +208,5 @@ module.exports = {
   getAllInventory,
   getVehicleIsOnSale,
   inventoryOnSalesSetDiscount,
+  inventoryOnSalesDetDiscount,
 };

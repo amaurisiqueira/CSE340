@@ -400,5 +400,40 @@ invCont.inventoryOnSalesSetDiscount = async function (req, res){
 
  }
 
+ 
+
+
+
+invCont.inventoryOnSalesDelDiscount = async function (req, res){
+    
+  // let nav = await utilities.getNav() ;
+  const inv_id = parseInt(req.body.inv_id);  
+ 
+
+  console.log('invCont.inventoryOnSalesDelDiscount = async function (req, res)  inv_id:', inv_id  );
+      
+  let result = await utilities.inventoryOnSalesDelDiscount(inv_id );
+
+  console.log(result.rowCount);
+  
+  if(result.rowCount){// .  
+    req.flash(
+        "notice",
+          "Discount was delete successfull "
+      );
+  }else{
+
+    req.flash(
+      "notice",
+        "ERROR deleting Discount"
+    );
+
+  }
+  res.redirect("/inv/inventory-on-sales");  
+
+ }
+
+
+
 module.exports = invCont;
 

@@ -1,4 +1,6 @@
-<h2><%= inv_id  %> - Descuento actual: <%= inv_discount %></h2>
-<form action="/remove-discount/<%= inv_id %>" method="POST">
-    <button type="submit">Eliminar Descuento</button>
+<h2 class="main_common-h2">ID: <%= inv_id  %> - With discount informed <%= inv_discount %>% </h2>
+<form action="/inv/remove-discount" method="POST">
+  
+    <input type="hidden" name="inv_id" value="<%= inv_id %>">
+    <button class="submit_boton_global margin_top_30px" type="submit">Delete Discount</button>
 </form>

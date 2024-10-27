@@ -105,5 +105,9 @@ router.post('/inventory-on-sales-set',
   inventoryValidate.checkinventorySetSalesData ,  
   utilities.checkAuthorization,   utilities.handleErrors ( invController.inventoryOnSalesSetDiscount) );
 
+  router.post('/remove-discount', 
+    utilities.checkAuthorization,   utilities.handleErrors ( invController.inventoryOnSalesDelDiscount) );
+  
+  
 
 module.exports = router;

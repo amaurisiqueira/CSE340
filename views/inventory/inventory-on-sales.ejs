@@ -1,3 +1,5 @@
+  
+  
   <% if (title) { %>
     <h1 class="global_h1_title"><%= title %></h1>
       <% } else {
@@ -15,8 +17,9 @@
         <%  }) %>
    </ul>
   <% } %> 
+  <div class="management_w4">
     
-  <form class="login_form" action="/inv/inventory-on-sales" method="post">
+  <form class="login_form  management_w4-caja" action="/inv/inventory-on-sales" method="post">
       
       <label class="login_form_input" id="classification-label">Classification <%- classification %></label>                        
        <input type="hidden" name="model_id" value="">
@@ -29,6 +32,8 @@
     <!-- Aquí se cargarán los detalles del vehículo -->
   </div>
 
+
+  </div> 
 
   <script>
 
@@ -82,6 +87,9 @@
 
                     document.getElementById('detailsVehicleContainer').innerHTML = data;
                 });
+        }else{
+
+          document.getElementById('detailsVehicleContainer').innerHTML =``;
         }
     }
 
