@@ -213,7 +213,7 @@ validate.checkLoginData = async (req, res, next) => {
   let errors = [];
   errors = validationResult(req);
 
-  console.log('errors', errors);
+  // console.log('errors', errors);
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav();
   

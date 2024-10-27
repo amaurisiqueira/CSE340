@@ -35,12 +35,12 @@ router.post(
   (req, res, next) => {
     const {classification_name} = req.body;
 
-    console.log("Antes de  addClassificationRules",classification_name);
+    // console.log("Antes de  addClassificationRules",classification_name);
     next();
   },
   inventoryValidate.addClassificationRules(),
   /*(req, res, next) => {
-    console.log("La ruta /add-classification ha sido llamada");
+    // console.log("La ruta /add-classification ha sido llamada");
     next();
   },*/
   inventoryValidate.checkClassificationData,

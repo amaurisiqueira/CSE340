@@ -10,7 +10,7 @@ const utilities = require("../utilities/");
 
 
 main.get('/',(req,res)=>{
-  console.log('enter');
+  // console.log('enter');
   res.render('index');
 });
 module.exports = main;

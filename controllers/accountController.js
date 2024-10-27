@@ -9,13 +9,13 @@ require("dotenv").config();
 async function buildLogin(req, res, next) {
       let nav = await utilities.getNav();
 
-      console.log('antes cargar login');
+      // console.log('antes cargar login');
       res.render("account/login", {
       title: "Login",
       nav,
       errors: null,
     });
-    console.log('despues cargar login');
+    // console.log('despues cargar login');
   };
 
 // w4 
@@ -85,7 +85,7 @@ async function registerAccount(req, res) {
   const { account_email, account_password } = req.body
   const accountData = await accountModel.getAccountByEmail(account_email)
 
-  console.log(' accountData:',accountData);
+  // console.log(' accountData:',accountData);
 
   if (!accountData) {
     req.flash("notice", "Please check your credentials and try again.")
@@ -99,7 +99,7 @@ async function registerAccount(req, res) {
   }
   try {
 
-console.log('account_password:',account_password , '  accountData.account_password' ,accountData.account_password);
+// console.log('account_password:',account_password , '  accountData.account_password' ,accountData.account_password);
 
 
     if (await bcrypt.compare(account_password, accountData.account_password)) {
@@ -135,17 +135,17 @@ async function accountLogin(req, res) {
   }
   //try {
 
-  //console.log('controlller -> accountLogin -> account_password:', account_password, ' accountData.account_password:', accountData.account_password);
+  //// console.log('controlller -> accountLogin -> account_password:', account_password, ' accountData.account_password:', accountData.account_password);
 
     if (await bcrypt.compare(account_password, accountData.account_password)) {
 
 
 
-    console.log('enter in await bcrypt.compare.');
+    // console.log('enter in await bcrypt.compare.');
 
 
-  //  console.log('accountData:',accountData);
-  //  console.log('accountData:',accountData.account_type);
+  //  // console.log('accountData:',accountData);
+  //  // console.log('accountData:',accountData.account_type);
 
       delete accountData.account_password
       const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 })
@@ -158,7 +158,7 @@ async function accountLogin(req, res) {
     }
     else {
      
-      console.log('Invalid password');
+      // console.log('Invalid password');
 
       req.flash("notice", "Invalid password. Please try again.")
       res.status(401).render("account/login", {
@@ -191,7 +191,7 @@ async function buildManagement(req, res, next) {
    let nav = await utilities.getNav();
    const  authorizedData =utilities.getAuthorizedName (res);
 
-   //console.log('authorizedName',authorizedData);
+   //// console.log('authorizedName',authorizedData);
     res.render(
         "account/management", {
         title: "Account Management",

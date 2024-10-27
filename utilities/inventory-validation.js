@@ -20,9 +20,9 @@ validate.addClassificationRules =  () => {
   //const { classification_name } = req.body ;
 
 
-  //console.log( "classification_name");
-  // console.log(classification_name );
-  //  console.log( body("classification_name").toString());
+  //// console.log( "classification_name");
+  // // console.log(classification_name );
+  //  // console.log( body("classification_name").toString());
  
   return [    
     
@@ -33,7 +33,7 @@ validate.addClassificationRules =  () => {
       .isLength({ min: 2 })
       .withMessage("A valid classification name is required.")     
       .custom(async (classification_name) => {
-        console.log(classification_name);
+        // console.log(classification_name);
         const classificationExists = await invModel.checkClassification(
           classification_name
         );
@@ -197,7 +197,7 @@ validate.checkInventoryData = async (req, res, next) => {
  * ********************************* */
 validate.inventorySetSalesRules = () => {
 
-console.log('ENTRA EN validate.inventorySetSalesRules = () ');
+// console.log('ENTRA EN validate.inventorySetSalesRules = () ');
 
 
   return [
@@ -234,10 +234,10 @@ validate.checkinventorySetSalesData = async (req, res, next) => {
   } = req.body;
   let errors = [];
 
-console.log( '-----------------------------------------------------------------------');  
-console.log( '  validate.checkinventorySetSalesData = async (req, res, next) => ');
-console.log( 'inv_id:', inv_id , ' inv_discount:',inv_discount );
-console.log( '-----------------------------------------------------------------------');  
+// console.log( '-----------------------------------------------------------------------');  
+// console.log( '  validate.checkinventorySetSalesData = async (req, res, next) => ');
+// console.log( 'inv_id:', inv_id , ' inv_discount:',inv_discount );
+// console.log( '-----------------------------------------------------------------------');  
 
   errors = validationResult(req);
   if (!errors.isEmpty()) {

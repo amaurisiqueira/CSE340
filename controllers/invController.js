@@ -9,14 +9,14 @@ const invCont = {};
  *  Build inventory by classification view  *
  * **************************************** */
 invCont.buildByClassificationId = async function (req, res, next) {
-  console.log('enter on invCont.buildByClassificationId ');
+  // console.log('enter on invCont.buildByClassificationId ');
   const classification_id = req.params.classificationId;
   const data = await invModel.getInventoryByClassificationId(classification_id);
   const grid = await utilities.buildClassificationGrid(data);
   let nav = await utilities.getNav();
 
   if(data == undefined ||  data.length <1){
-    console.log('Data empty');
+    // console.log('Data empty');
     res.status(500).render("errors/error", {
      title: 'Internal Server Error!',
      message:"Internal server error resolving the route!",
@@ -42,7 +42,7 @@ invCont.buildByDetailId = async function (req, res, next) {
   const grid = await utilities.buildVehicleDet(data);
   let nav = await utilities.getNav();
   if(data == undefined ||  data.length <1){
-    console.log('Data empty');
+    // console.log('Data empty');
     res.status(500).render("errors/error", {
      title: 'Internal Server Error!',
      message:"Internal server error resolving the route!",
@@ -96,12 +96,12 @@ invCont.addClassification = async function (req, res, next) {
   
   const { classification_name } = req.body ;
 
-  /*console.log('******************************************************');
-  console.log('classification_name');
-  console.log(classification_name);
-  console.log('******************************************************');*/
+  /*// console.log('******************************************************');
+  // console.log('classification_name');
+  // console.log(classification_name);
+  // console.log('******************************************************');*/
   const addResult = await invModel.addClassification(classification_name);
- console.log('addResult',addResult);
+ // console.log('addResult',addResult);
   if (addResult) {
     req.flash(
       "notice",
@@ -230,11 +230,11 @@ W5
 invCont.deleteView = async function (req, res, next) {
   const inv_id = parseInt(req.params.inv_id)
 
-  console.log(inv_id);
+  // console.log(inv_id);
   let nav = await utilities.getNav();
   const Datas = await invModel.getVehicleByDetId(inv_id);
   const itemData =Datas [0];
-  console.log('itemData',itemData.inv_make);
+  // console.log('itemData',itemData.inv_make);
 
   const itemName = `${itemData.inv_make} ${itemData.inv_model}`;
   res.render("./inventory/delete-confirm", {
@@ -259,13 +259,13 @@ invCont.deleteItem = async function (req, res, next) {
 
 
 
-  console.log('DeleteItem enter');
+  // console.log('DeleteItem enter');
 
 
-console.log('req.body.inv_id:',req.body.inv_id);
+// console.log('req.body.inv_id:',req.body.inv_id);
 
   const inv_id = parseInt(req.body.inv_id);
-console.log('inv_id :',inv_id);
+// console.log('inv_id :',inv_id);
   
   const deleteResult = await invModel.deleteInventoryItem(
     inv_id
@@ -288,7 +288,7 @@ console.log('inv_id :',inv_id);
 invCont.chooseAction =  async function (req, res){
   const action = req.body.action;
   const modelId = req.body.model_id[0]; 
-  console.log('modelId:',modelId);
+  // console.log('modelId:',modelId);
   if (action === 'modify') {
       // Redirigir a la ruta para modificar        
       
@@ -344,14 +344,14 @@ invCont.inventoryOnSales = async function (req, res){
 
 invCont.inventoryOnSalesCheckOnSale = async function (req, res){
   //let nav = await utilities.getNav() ;  
-  //console.log('ENTRA ----> invCont.inventoryOnSalesCheckOnSale = async function (req, res)');
+  //// console.log('ENTRA ----> invCont.inventoryOnSalesCheckOnSale = async function (req, res)');
   const vehicleId = req.params.id;
 
 
-  console.log('invCont.inventoryOnSalesCheckOnSale = async function (req, res)     vehicleId: ', vehicleId );
+  // console.log('invCont.inventoryOnSalesCheckOnSale = async function (req, res)     vehicleId: ', vehicleId );
   
   let classificationList = await utilities.getVehicleIsOnSale(vehicleId);
-  console.log( ' classificationList:',  classificationList );
+  // console.log( ' classificationList:',  classificationList );
   
 
     //res.render('inventory/vehicle-with-discount', { vehicleId ,  layout: 'false' } );
@@ -371,11 +371,11 @@ invCont.inventoryOnSalesSetDiscount = async function (req, res){
   const inv_id = parseInt(req.body.inv_id);  
   const inv_discount =  parseInt(req.body.inv_discount);
 
-  console.log('invCont.inventoryOnSalesSetDiscount = async function (req, res)    inv_id:', inv_id , '  inv_discount:', inv_discount );
+  // console.log('invCont.inventoryOnSalesSetDiscount = async function (req, res)    inv_id:', inv_id , '  inv_discount:', inv_discount );
       
   let result = await utilities.inventoryOnSalesSetDiscount(inv_id,inv_discount );
 
-  console.log(result.rowCount);
+  // console.log(result.rowCount);
   
   if(result.rowCount){// .  
     req.flash(
@@ -410,11 +410,11 @@ invCont.inventoryOnSalesDelDiscount = async function (req, res){
   const inv_id = parseInt(req.body.inv_id);  
  
 
-  console.log('invCont.inventoryOnSalesDelDiscount = async function (req, res)  inv_id:', inv_id  );
+  // console.log('invCont.inventoryOnSalesDelDiscount = async function (req, res)  inv_id:', inv_id  );
       
   let result = await utilities.inventoryOnSalesDelDiscount(inv_id );
 
-  console.log(result.rowCount);
+  // console.log(result.rowCount);
   
   if(result.rowCount){// .  
     req.flash(

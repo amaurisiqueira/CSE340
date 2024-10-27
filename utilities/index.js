@@ -28,7 +28,7 @@ Util.getNav = async function (req, res, next) {
   })
   list += "</ul>";
 
- // console.log('Util.getNav   List' , list);  
+ // // console.log('Util.getNav   List' , list);  
   return list;
 }
 
@@ -181,7 +181,7 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
 Util.buildClassificationList = async function (classification_id = null) {
   let data = await inventoryModel.getClassifications()
 
-  console.log( "Util.buildClassificationList.data: " ,data) ;
+  // console.log( "Util.buildClassificationList.data: " ,data) ;
 
   let classificationList =
 
@@ -265,9 +265,9 @@ Util.checkJWTToken = (req, res, next) => {
   W5 jwt
  * ************************************ */
   Util.checkAuthorization = (req, res, next) => {
-   // console.log('res.locals.accountData.account_type',res.locals.accountData.account_type);
+   // // console.log('res.locals.accountData.account_type',res.locals.accountData.account_type);
 
-    // console.log('res.locals.accountData.account_type', res.locals.accountData.account_type.toUpperCase());
+    // // console.log('res.locals.accountData.account_type', res.locals.accountData.account_type.toUpperCase());
     if(res.locals.accountData==undefined){
       req.flash("notice", "Sorry, you don't have access.")
       res.redirect("/account/login")
@@ -314,7 +314,7 @@ W6
     
     let data = await inventoryModel.inventoryOnSalesSetDiscount(vehicleId,discount);
 
-    console.log(' Util.inventoryOnSalesSetDiscount = async function (vehicleId,discount) :' , data);
+    // console.log(' Util.inventoryOnSalesSetDiscount = async function (vehicleId,discount) :' , data);
     return data    
   } 
 

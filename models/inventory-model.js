@@ -58,10 +58,10 @@ async function getVehicleByDetId(detail_id){
 async function addClassification(classification_name){
   try {
     const sql = "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *";
-    console.log('***************************************');
-    console.log(sql);
+    // console.log('***************************************');
+    // console.log(sql);
 
-    console.log('***************************************');
+    // console.log('***************************************');
 
     return await pool.query(sql, [classification_name])
   } catch (error) {
@@ -74,7 +74,7 @@ async function addClassification(classification_name){
 async function checkClassification(classification_name){
 try {
   const sql = "SELECT * FROM classification WHERE classification_name = $1";
-// console.log('Entro en check');
+// // console.log('Entro en check');
 
   const classification = await pool.query(sql, [classification_name]);
   return classification.rowCount;
@@ -155,7 +155,7 @@ async function getVehicleIsOnSale(vehicleId){
 
     if(vehicle.rowCount>0){
 
-      console.log(vehicle.rows[0].inv_id, '  discount ', vehicle.rows[0].inv_discount );
+      // console.log(vehicle.rows[0].inv_id, '  discount ', vehicle.rows[0].inv_discount );
       return {
         id: vehicle.rows[0].inv_id,
         isOnSale: parseInt(vehicle.rows[0].inv_discount)>0  ? true : false , 

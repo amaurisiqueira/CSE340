@@ -39,7 +39,7 @@
 
 
   const elemntList = document.getElementById('modelList');
-  console.log("*******elemntList:",elemntList);
+  // console.log("*******elemntList:",elemntList);
 
   if(elemntList){
 
@@ -51,11 +51,11 @@
 
 
       // const modelId =( document.querySelector('input[name="model_id"]').value) ;    
-      // console.log('loadVehicleDetails.modelId:', modelId);
+      // // console.log('loadVehicleDetails.modelId:', modelId);
 
       
         const inv_id =  parseInt( event.target.value);
-        console.log( 'before vehicleId:', inv_id );
+        // console.log( 'before vehicleId:', inv_id );
 
         
 
@@ -69,21 +69,21 @@
 
           objinv_id.value=inv_id ;
 
-          console.log( '** let objinv_id = document.getElementById(inv_id);:', objinv_id );
+          // console.log( '** let objinv_id = document.getElementById(inv_id);:', objinv_id );
 
          }
 
 
 
 
-          console.log( 'vehicleId:', inv_id );
+          // console.log( 'vehicleId:', inv_id );
                  ///inventory-on-sales/check/:id          
             fetch(`/inv/vehicle-on-sales-details-check/${inv_id}`)
 
                 .then(response => response.text())
                 .then(data => {
 
-  console.log('loadVehicleDetails(events).data:',data );
+  // console.log('loadVehicleDetails(events).data:',data );
 
                     document.getElementById('detailsVehicleContainer').innerHTML = data;
                 });

@@ -54,7 +54,7 @@ app.use(require('connect-flash')());
 
 app.use(function(req, res, next){
   res.locals.notices = require('express-messages')(req, res) ;
-  // console.log('\n\n\n\n\n\nNotices:', res.locals.notices); //
+  // // console.log('\n\n\n\n\n\nNotices:', res.locals.notices); //
   next()
 });
 
@@ -142,6 +142,6 @@ const host = process.env.HOST;
  *************************/
 app.listen(port, () => {
 
-  console.log(`app listening on ${host}:${port}`);
+  // console.log(`app listening on ${host}:${port}`);
 
 })
